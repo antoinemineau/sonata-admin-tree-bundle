@@ -2,8 +2,8 @@
 
 namespace RedCode\TreeBundle\Controller;
 
-use App\Entity\User;
-use App\Entity\Retail;
+use App\Domain\Main\Entity\User;
+use App\Domain\Main\Entity\RetailInterface;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
@@ -83,7 +83,7 @@ class TreeAdminController extends CRUDController
 
                 $nodes = array_map(
                     function ($node) {
-                        if ($node instanceof Retail) {
+                        if ($node instanceof RetailInterface) {
                             return [
                                 'retailId' => $node->getId(),
                                 'text' => (string) $node,
