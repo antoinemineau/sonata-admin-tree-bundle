@@ -41,7 +41,10 @@
                                         action: function(menu, data) {
                                             var tree = $('#jstree_div').jstree(true);
                                             var selectedNodes = tree.get_selected(true);
-                                            var id = selectedNodes[0].retailId;
+                                            // jstree (3.3.x) stores non-standard JSON fields under node.original,
+                                            // not on the node itself. The retail node only carries a custom
+                                            // "retailId" (no standard "id"), so read it from .original.
+                                            var id = selectedNodes[0].original.retailId;
                                             var editUrl = '{{ path('admin_app_retail_edit', {'id': '{id}'}) }}'.replace(encodeURI('{id}'), id);
 
                                             return start_field_dialog_form_edit_tree(editUrl, $('#jstree_div'));
